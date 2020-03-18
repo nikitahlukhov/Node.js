@@ -20,8 +20,7 @@ const server = http.createServer(function (req, res) {
             }))
         } else {
             if (req.url === '/logs') {
-                let obj = JSON.parse(data);
-                res.end(JSON.stringify(obj.logs))
+                res.end(data)
             } else {
                 let obj = JSON.parse(data);
                 let requestObj = {
