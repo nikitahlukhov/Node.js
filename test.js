@@ -12,13 +12,13 @@ const server = http.createServer(function (req, res) {
         'Content-Type': 'application/json'
     });
     
-    fs.readFile('test.json', 'utf8', function (err, data) {
+    fs.readFile('someJsonFile.json', 'utf8', function (err, data) {
         if (err) {
             let obj = {
                 logs: [reqObj],
             };
 
-            fs.writeFileSync('test.json', JSON.stringify(obj))
+            fs.writeFileSync('someJsonFile.json', JSON.stringify(obj))
 
             res.end(JSON.stringify({
                 status: res.statusMessage
@@ -30,8 +30,8 @@ const server = http.createServer(function (req, res) {
                 let obj = JSON.parse(data);
                 obj.logs.push(reqObj);
 
-                fs.writeFileSync('test.json', JSON.stringify(obj))
-                
+                fs.writeFileSync('someJsonFile.json', JSON.stringify(obj))
+
                 res.end(JSON.stringify({
                     status: res.statusMessage
                 }))
