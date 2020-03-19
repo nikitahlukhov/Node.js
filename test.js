@@ -1,43 +1,41 @@
 const http = require('http');
 const fs = require('fs');
 
-const server = http.createServer(function (req, res) {
-    let reqObj = {
+const LOG_FILE_NAME = 'logs.json';
+const PORT = 4000;
+
+const server = http.createServer((req, res) => {
+    const reqData = {
         method: req.method,
         url: req.url,
         time: Date.parse(new Date()),
-    }
+    };
 
     res.writeHead(200, {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     });
-    
-    fs.readFile('someJsonFile.json', 'utf8', function (err, data) {
+
+    fs.readFile(LOG_FILE_NAME, 'utf8', (err, data) => {
+        let test;
         if (err) {
-            let obj = {
-                logs: [reqObj],
+            test = {
+                logs: [],
             };
-
-            fs.writeFileSync('someJsonFile.json', JSON.stringify(obj))
-
-            res.end(JSON.stringify({
-                status: res.statusMessage
-            }))
-        } else {
-            if (req.url === '/logs') {
-                res.end(data)
-            } else {
-                let obj = JSON.parse(data);
-                obj.logs.push(reqObj);
-
-                fs.writeFileSync('someJsonFile.json', JSON.stringify(obj))
-
-                res.end(JSON.stringify({
-                    status: res.statusMessage
-                }))
-            }
         }
-    })
-})
 
-server.listen(3000);
+        const logData = test || JSON.parse(data);
+        logData.logs.push(reqData);
+
+        fs.writeFile(LOG_FILE_NAME, JSON.stringify(logData), () => {});
+
+        if (req.url === '/logs') {
+            return res.end(JSON.stringify(logData));
+        }
+
+        res.end(JSON.stringify({
+            status: res.statusMessage,
+        }))
+    })
+});
+
+server.listen(PORT);
