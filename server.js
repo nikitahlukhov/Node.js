@@ -6,12 +6,16 @@ const loginRouter = require('./routes/login');
 const registrationRouter = require('./routes/registration');
 const todoListRouter = require('./routes/todoList');
 
-app.use('/assets', express.static('assets'));
 app.use(express.json());
 
-app.get('/api', (req, res) => {
+app.use('/', express.static('assets'));
+app.use('/login', express.static('assets/login'));
+app.use('/registration', express.static('assets/registration'));
+app.use('/todoList', express.static('assets/todoList'));
+
+/* app.get('/api', (req, res) => {
     res.sendFile(__dirname + '/assets/index.html');
-});
+}); */
 
 app.use('/api', loginRouter);
 app.use('/api', registrationRouter);

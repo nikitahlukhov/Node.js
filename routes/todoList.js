@@ -7,9 +7,9 @@ const checkToken = require('../auth/auth');
 
 const USERS_FILE_NAME = './users.json';
 
-router.get('/todoList/:id', (req, res) => {
+/* router.get('/todoList/:id', (req, res) => {
     res.sendFile(path.resolve('./assets/todoList/todoList.html'));
-});
+}); */
 
 router.put('/todoList/:id', (req, res) => {
     let newTasks = {
@@ -28,10 +28,10 @@ router.put('/todoList/:id', (req, res) => {
     })
 });
 
-router.get('/todoList/:id/auth', checkToken, (req, res) => {
+router.get('/auth', checkToken, (req, res) => {
     
 
-    if (req.user.username == req.params.id) {
+    if (req.user.username) {
        return res.sendStatus(200) 
     } else {
         res.sendStatus(400)

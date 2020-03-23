@@ -18,7 +18,7 @@ form.addEventListener('submit', (e) => {
           if (response.status !== 200) {  
             alert('such user exists') 
           } else {
-            location.href = "http://localhost:8000/api/login"
+            location.href = "http://localhost:8000/login"
           } 
         })    
     e.preventDefault();

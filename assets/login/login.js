@@ -24,7 +24,7 @@ form.addEventListener('submit', (e) => {
           })
           .then(token => {
             window.localStorage.token = JSON.stringify(token)
-            const newLocation = "http://localhost:8000/api/todoList/" + userData.username;
+            const newLocation = "http://localhost:8000/todoList/";
             window.location = newLocation;
         })    
     e.preventDefault();

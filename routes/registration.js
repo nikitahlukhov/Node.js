@@ -5,9 +5,9 @@ const path = require('path');
 
 const USERS_FILE_NAME = './users.json';
 
-router.get('/registration', (req, res) => {
+/* router.get('/registration', (req, res) => {
     res.sendFile(path.resolve('./assets/registration/registration.html'));
-});
+}); */
 
 router.post('/registration', (req, res) => {
     let newUser = {

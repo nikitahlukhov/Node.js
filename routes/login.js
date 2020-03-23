@@ -8,9 +8,9 @@ const USERS_FILE_NAME = './users.json';
 const SECRET = require('../auth/secret').secret;
 
 
-router.get('/login', (req, res) => {
+/* router.get('/login', (req, res) => {
     res.sendFile(path.resolve('./assets/login/login.html'));
-});
+}); */
 
 router.post('/login', (req, res) => {
     let userLogin = {

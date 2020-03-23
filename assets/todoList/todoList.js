@@ -7,11 +7,11 @@
     token = userInfo.jwt_token
     tasks = userInfo.tasks;
   } else {
-    location.href = "http://localhost:8000/api/login";    
+    location.href = "http://localhost:8000/login";    
   }
 
   if (token) {
-    fetch(document.URL + '/auth', {
+    fetch("http://localhost:8000/api/auth", {
       method: 'GET',
       headers: {
         'Authorization': token,
@@ -19,7 +19,7 @@
     })
     .then((response) => {
       if (response.status === 400) {
-        location.href = "http://localhost:8000/api/login"
+        location.href = "http://localhost:8000/login"
       } 
     })
   }
@@ -82,16 +82,7 @@
   const addForm = forms['add-book'];
   addForm.addEventListener('submit', function(e){
     e.preventDefault();
-    fetch(document.URL + '/auth', {
-      method: 'GET',
-      headers: {
-        'Authorization': token,
-      }
-    })
-    .then((response) =>{  
-      if (response.status !== 200) {  
-        alert('You have no power here')
-      } else {
+    
         
         // create elements
     const value = addForm.querySelector('input[type="text"]').value;
@@ -125,11 +116,11 @@
       },
       body: JSON.stringify(tasks),
     })
-      }
-    })
+      
+    
   });
 
     logoutButton.addEventListener('click', () => {
     localStorage.clear();
-    location.href = "http://localhost:8000/api/login";    
+    location.href = "http://localhost:8000/login";    
   })
