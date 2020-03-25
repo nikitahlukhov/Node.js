@@ -1,13 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
-const path = require('path');
 
 const USERS_FILE_NAME = './users.json';
-
-/* router.get('/registration', (req, res) => {
-    res.sendFile(path.resolve('./assets/registration/registration.html'));
-}); */
 
 router.post('/registration', (req, res) => {
     let newUser = {
@@ -38,14 +33,8 @@ router.post('/registration', (req, res) => {
 
         usersList.users.push(newUser);
         fs.writeFile(USERS_FILE_NAME, JSON.stringify(usersList), () => {});
-        res.sendStatus(200)
-
-        
-    })
-
-    
-    
+        res.sendStatus(200)       
+    })    
 });
 
 module.exports = router;
-
