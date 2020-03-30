@@ -1,6 +1,7 @@
 module.exports = {
   'env': {
     'browser': true,
+    'commonjs': true,
     'es6': true,
   },
   'extends': [
@@ -12,8 +13,8 @@ module.exports = {
   },
   'parserOptions': {
     'ecmaVersion': 2018,
-    'sourceType': 'module',
   },
   'rules': {
+    "new-cap": "off",
   },
 };
