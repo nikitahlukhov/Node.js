@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-// create user Schema and model
+// create truck Schema and model
 const truckSchema = new Schema({
   name: {
     type: String,
   },
   created_by: {
     type: mongoose.ObjectId,
-    required: [true, 'Name field is required'],
+    required: true,
   },
   assigned_to: {
     type: mongoose.ObjectId,
@@ -17,7 +17,7 @@ const truckSchema = new Schema({
   },
   status: {
     type: String,
-    required: [true, 'Type field is required'],
+    required: true,
     default: 'IS',
   },
   type: {

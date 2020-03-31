@@ -35,4 +35,13 @@ router.put('/profile/:userId', async (req, res) => {
   };
 });
 
+router.delete('/profile/:userId', async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.userId);
+    res.json('user has been deleted');
+  } catch (err) {
+    console.log(err);
+  };
+});
+
 module.exports = router;

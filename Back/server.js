@@ -9,6 +9,7 @@ const login = require('./routes/login');
 const auth = require('./routes/auth');
 const profile = require('./routes/profile');
 const trucks = require('./routes/trucks');
+const loads = require('./routes/loads');
 
 app.use(express.json());
 
@@ -23,6 +24,7 @@ app.use('/api', login);
 app.use('/api', auth);
 app.use('/api', profile);
 app.use('/api', trucks);
+app.use('/api', loads);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on PORT: ${PORT}`);

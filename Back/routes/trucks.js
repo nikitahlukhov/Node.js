@@ -47,6 +47,7 @@ router.delete('/trucks/:userId/:truckId',
     async (req, res) => {
       try {
         await Truck.findByIdAndDelete(req.params.truckId);
+        res.json('truck has been deleted');
       } catch (err) {
         console.log(err);
       };
