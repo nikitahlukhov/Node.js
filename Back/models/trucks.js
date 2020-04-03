@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const truckSchema = new Schema({
   name: {
     type: String,
+    default: 'untitled',
   },
   created_by: {
     type: mongoose.ObjectId,
@@ -14,6 +15,10 @@ const truckSchema = new Schema({
   assigned_to: {
     type: mongoose.ObjectId,
     default: null,
+  },
+  isAssigned: {
+    type: Boolean,
+    default: false,
   },
   status: {
     type: String,

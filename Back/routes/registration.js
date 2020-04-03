@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const validation = require('../reqValidation/validation');
 
-router.post('/registration', async (req, res) => {
+router.post('/registration', validation.registration, async (req, res) => {
   try {
     await User.exists({login: req.body.login})
         .then((result) => {
@@ -11,9 +12,10 @@ router.post('/registration', async (req, res) => {
             return res.json('User with such username exists');
           }
           req.body.password = bcrypt.hashSync(req.body.password, 10);
-          req.body.status = req.body.type === 'driver' ? 'IS' : undefined;
           User.create(req.body)
               .then((user) => {
+                user.type === 'driver' ? user.status = 'IS' : delete user.status;
+                user.save();
                 res.send(user);
               });
         });

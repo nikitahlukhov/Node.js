@@ -5,8 +5,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const errorMessage = 'Username or password is wrong';
+const validation = require('../reqValidation/validation');
 
-router.post('/login', async (req, res) => {
+router.post('/login', validation.login, async (req, res) => {
   try {
     await User.findOne({login: req.body.login}, (err, user) => {
       if (!user) {

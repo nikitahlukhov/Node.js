@@ -23,7 +23,6 @@ const loadSchema = new Schema({
   },
   state: {
     type: String,
-    required: true,
     default: null,
   },
   dimensions: {
@@ -43,6 +42,12 @@ const loadSchema = new Schema({
   payload: {
     type: Number,
     required: [true, 'Payload field is required'],
+  },
+  logs: {
+    type: Array,
+    default: [{
+      message: `load created`,
+      time: `${new Date()}`}],
   },
 });
 
