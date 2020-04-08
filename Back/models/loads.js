@@ -27,15 +27,15 @@ const loadSchema = new Schema({
   },
   dimensions: {
     width: {
-      type: String,
+      type: Number,
       required: [true, 'Width field is required'],
     },
     length: {
-      type: String,
+      type: Number,
       required: [true, 'Length field is required'],
     },
     height: {
-      type: String,
+      type: Number,
       required: [true, 'Height field is required'],
     },
   },

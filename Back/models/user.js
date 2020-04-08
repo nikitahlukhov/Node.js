@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 // create user Schema and model
 const userSchema = new Schema({
-  login: {
+  username: {
     type: String,
     required: [true, 'Name field is required'],
   },
@@ -12,7 +12,7 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Password field is required'],
   },
-  type: {
+  role: {
     type: String,
     required: [true, 'Type field is required'],
   },

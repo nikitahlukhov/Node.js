@@ -1,8 +1,13 @@
+// core
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+// model
+const User = require('../models/user');
+// middleware
 const checkToken = require('../middleware/checkToken');
+const isShipper = require('../middleware/isShipper');
+// validation
 const validation = require('../reqValidation/validation');
 
 // profile info
@@ -10,7 +15,7 @@ router.get('/profile', checkToken, async (req, res) => {
   try {
     await User.findById(req.userId)
         .then((result) => {
-          res.json(result);
+          res.status(200).json(result);
         });
   } catch (err) {
     console.log(err);
@@ -32,19 +37,21 @@ router.put('/profile/changePassword',
                     }
                     user.password = bcrypt.hashSync(req.body.newPassword, 10);
                     user.save();
-                    res.status(200).json('password has been changed');
+                    res.status(200).json({'status':
+                    'password has been changed'});
                   });
             });
       } catch (err) {
+        res.send(err);
         console.log(err);
       };
     });
 
 // delete profile
-router.delete('/profile', checkToken, async (req, res) => {
+router.delete('/profile', checkToken, isShipper, async (req, res) => {
   try {
     await User.findByIdAndDelete(req.userId);
-    res.json('user has been deleted');
+    res.status(200).json('user has been deleted');
   } catch (err) {
     console.log(err);
   };

@@ -1,12 +1,15 @@
+// core
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+// model
+const User = require('../models/user');
+// validation
 const validation = require('../reqValidation/validation');
 
-router.post('/registration', validation.registration, async (req, res) => {
+router.post('/auth/register', validation.registration, async (req, res) => {
   try {
-    await User.exists({login: req.body.login})
+    await User.exists({username: req.body.username})
         .then((result) => {
           if (result) {
             return res.status(409).send('such user exists');
@@ -14,12 +17,20 @@ router.post('/registration', validation.registration, async (req, res) => {
           req.body.password = bcrypt.hashSync(req.body.password, 10);
           User.create(req.body)
               .then((user) => {
-                user.type === 'driver' ? user.status = 'IS' : delete user.status;
+                if (user.role === 'driver') {
+                  user.status = 'IS';
+                  user.save();
+                  return res.status(200).json({'status':
+                  'User registered successfully'});
+                };
+                delete user.status;
                 user.save();
-                res.sendStatus(200);
+                res.status(200).json({'status':
+                'User registered successfully'});
               });
         });
   } catch (err) {
+    res.send(err);
     console.log(err);
   };
 });

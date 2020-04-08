@@ -2,13 +2,13 @@ const joi = require('@hapi/joi');
 joi.objectId = require('joi-objectid')(joi);
 
 const registrationSchema = joi.object({
-  login: joi.string().required(),
+  username: joi.string().required(),
   password: joi.string().required(),
-  type: joi.string().required(),
+  role: joi.string().required(),
 });
 
 const loginSchema = joi.object({
-  login: joi.string().required(),
+  username: joi.string().required(),
   password: joi.string().required(),
 });
 
@@ -20,9 +20,9 @@ const changePasswordSchema = joi.object({
 const createLoadSchema = joi.object({
   name: joi.string(),
   dimensions: joi.object({
-    width: joi.string().required(),
-    length: joi.string().required(),
-    height: joi.string().required(),
+    width: joi.number().required(),
+    length: joi.number().required(),
+    height: joi.number().required(),
   }),
   payload: joi.number(),
 });
@@ -30,15 +30,15 @@ const createLoadSchema = joi.object({
 const updateLoadSchema = joi.object({
   name: joi.string().required(),
   dimensions: joi.object({
-    width: joi.string().required(),
-    length: joi.string().required(),
-    height: joi.string().required(),
+    width: joi.number().required(),
+    length: joi.number().required(),
+    height: joi.number().required(),
   }),
   payload: joi.number().required(),
 });
 
 const createTruckSchema = joi.object({
-  type: joi.string(),
+  type: joi.string().required(),
   name: joi.string(),
 });
 

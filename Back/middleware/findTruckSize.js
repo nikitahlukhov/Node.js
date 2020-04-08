@@ -1,9 +1,18 @@
+const trucks = require('../trucksSizes/trucks');
+
 module.exports = (width, length, height, payload) => {
-  if (payload > 4000 || width > 700 || length > 350 || height > 170) {
+  if (payload > trucks.LARGE_STRAIGHT.payload ||
+    width > trucks.LARGE_STRAIGHT.width ||
+    length > trucks.LARGE_STRAIGHT.length ||
+    height > trucks.LARGE_STRAIGHT.height) {
     return null;
-  } else if (payload > 2500 || width > 500 || length > 250 || height > 170) {
-    return ['large'];
-  } else if (payload > 1700 || width > 300) {
-    return ['small_straight', 'large_straight'];
-  } else return ['sprinter', 'small_straight', 'large_straight'];
+  } else if (payload > trucks.SMALL_STRAIGHT.payload ||
+    width > trucks.SMALL_STRAIGHT.width ||
+    length > trucks.SMALL_STRAIGHT.length ||
+    height > trucks.SMALL_STRAIGHT.height) {
+    return ['LARGE_STRAIGHT'];
+  } else if (payload > trucks.SPRINTER.payload ||
+    width > trucks.SPRINTER.width) {
+    return ['SMALL_STRAIGHT', 'LARGE_STRAIGHT'];
+  } else return ['SPRINTER', 'SMALL_STRAIGHT', 'LARGE_STRAIGHT'];
 };

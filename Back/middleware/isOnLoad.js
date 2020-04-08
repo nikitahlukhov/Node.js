@@ -4,7 +4,8 @@ module.exports = async (req, res, next) => {
   try {
     await User.findOne({_id: req.userId}, (err, user) => {
       if (user.status === 'OL') {
-        return res.json('Driver is on load');
+        return res.status(400).json({'status':
+        'Driver is on load'});
       }
       next();
     });

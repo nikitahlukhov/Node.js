@@ -4,7 +4,10 @@ const config = require('config');
 module.exports = (req, res, next) => {
   const [tokenType, jwtToken] = req.headers['authorization'].split(' ');
   const user = jwt.verify(jwtToken, config.get('secret'));
-  req.userId = user.user._id;
-  req.userRole = user.user.role;
-  next();
+
+  if (user.user.role === 'shipper') {
+    return next();
+  }
+  res.status(403).json({'status': 'no auth'});
+  throw new Error;
 };
