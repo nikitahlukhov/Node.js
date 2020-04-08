@@ -9,14 +9,14 @@ router.post('/registration', validation.registration, async (req, res) => {
     await User.exists({login: req.body.login})
         .then((result) => {
           if (result) {
-            return res.json('User with such username exists');
+            return res.status(409).send('such user exists');
           }
           req.body.password = bcrypt.hashSync(req.body.password, 10);
           User.create(req.body)
               .then((user) => {
                 user.type === 'driver' ? user.status = 'IS' : delete user.status;
                 user.save();
-                res.send(user);
+                res.sendStatus(200);
               });
         });
   } catch (err) {

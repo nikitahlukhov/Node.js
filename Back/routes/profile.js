@@ -10,7 +10,7 @@ router.get('/profile', checkToken, async (req, res) => {
   try {
     await User.findById(req.userId)
         .then((result) => {
-          res.json({result});
+          res.json(result);
         });
   } catch (err) {
     console.log(err);
@@ -28,11 +28,11 @@ router.put('/profile/changePassword',
               bcrypt.compare(req.body.oldPassword, user.password,
                   (err, result) => {
                     if (!result) {
-                      return res.json('Old password is wrong');
+                      return res.status(409).send('Old password is wrong');
                     }
                     user.password = bcrypt.hashSync(req.body.newPassword, 10);
                     user.save();
-                    res.json(user);
+                    res.status(200).json('password has been changed');
                   });
             });
       } catch (err) {
