@@ -15,10 +15,3 @@ To run this project you should do the following:
 13. Run server with command `npm start`;
 14. Voilà, make requests with Postman ton see how my App works.
 
-
-
-
-
-
-
-5. [Download and install MongoDB Community Server](https://www.mongodb.com/download-center/community) and run it;
