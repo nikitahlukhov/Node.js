@@ -1,4 +1,4 @@
-Back/node_modules
-Back/config/local.js
+node_modules
+config/local.js
 Front
-Back/flow
+flow
